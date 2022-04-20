@@ -16,6 +16,9 @@ ThemeData darkTheme = ThemeData(
       color: Colors.white,
     ),
   ),
+  cardTheme: const CardTheme(
+    color: AppColors.backgroundDarkColor,
+  ),
 );
 
 ThemeData lightTheme = ThemeData(
@@ -32,5 +35,8 @@ ThemeData lightTheme = ThemeData(
       fontWeight: FontWeight.bold,
       color: Colors.black,
     ),
+  ),
+  cardTheme: const CardTheme(
+    color: Colors.white,
   ),
 );

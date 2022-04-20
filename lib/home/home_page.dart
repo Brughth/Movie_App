@@ -5,6 +5,7 @@ import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:getwidget/colors/gf_color.dart';
 import 'package:getwidget/components/progress_bar/gf_progress_bar.dart';
 import 'package:getwidget/types/gf_progress_type.dart';
 import 'package:movie_infos/home/cubit/carousel_cubit.dart';
@@ -135,7 +136,7 @@ class _HomePageState extends State<HomePage>
 
               return Center(
                 child: SizedBox(
-                  height: hieghtScreen * .6, // card height
+                  height: hieghtScreen * .65, // card height
                   child: PageView.builder(
                     itemCount: result.length,
                     controller: PageController(
@@ -169,26 +170,136 @@ class _HomePageState extends State<HomePage>
                                     state.currentIndex == i ? 0 : 30,
                                   ),
                                   child: Card(
-                                    shadowColor: Colors.transparent,
-                                    elevation: 10,
+                                    elevation: 1,
                                     shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(15)),
+                                      borderRadius: BorderRadius.circular(15),
+                                    ),
                                     child: Center(
-                                      child: Stack(
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
                                         children: [
-                                          Container(
-                                            decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(15),
-                                              image: DecorationImage(
-                                                image: NetworkImage(
-                                                  url!,
+                                          Expanded(
+                                            flex: 7,
+                                            child: Container(
+                                              decoration: BoxDecoration(
+                                                color: AppColors.primary,
+                                                borderRadius:
+                                                    BorderRadius.circular(15),
+                                                image: DecorationImage(
+                                                  image: NetworkImage(
+                                                    url!,
+                                                  ),
+                                                  fit: BoxFit.cover,
                                                 ),
-                                                fit: BoxFit.cover,
                                               ),
                                             ),
                                           ),
+                                          Expanded(
+                                            flex: 1,
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Expanded(
+                                                  flex: 1,
+                                                  child: Padding(
+                                                    padding: const EdgeInsets
+                                                        .symmetric(vertical: 4),
+                                                    child: GFProgressBar(
+                                                      circleWidth: 6,
+                                                      fromRightToLeft: true,
+                                                      margin: EdgeInsets.zero,
+                                                      padding: EdgeInsets.zero,
+                                                      percentage: populatTV
+                                                                  .voteArage ==
+                                                              0
+                                                          ? 1
+                                                          : populatTV
+                                                                  .voteArage /
+                                                              10,
+                                                      radius: 50,
+                                                      type: GFProgressType
+                                                          .circular,
+                                                      backgroundColor:
+                                                          Colors.black,
+                                                      progressBarColor:
+                                                          populatTV.voteArage ==
+                                                                  0
+                                                              ? GFColors.DANGER
+                                                              : AppColors
+                                                                  .primary,
+                                                      child: Center(
+                                                        child: Text(
+                                                          "${(populatTV.voteArage * 10).toInt().toString()} %",
+                                                          style:
+                                                              const TextStyle(
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                                Expanded(
+                                                  flex: 3,
+                                                  child: Padding(
+                                                    padding: const EdgeInsets
+                                                        .symmetric(
+                                                      vertical: 2,
+                                                      horizontal: 1,
+                                                    ),
+                                                    child: Column(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .start,
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        Expanded(
+                                                          child: Text(
+                                                            populatTV.name,
+                                                            style:
+                                                                const TextStyle(
+                                                              overflow:
+                                                                  TextOverflow
+                                                                      .ellipsis,
+                                                              fontSize: 21,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w600,
+                                                            ),
+                                                          ),
+                                                        ),
+                                                        Expanded(
+                                                          child: Text(
+                                                            populatTV
+                                                                .firstAirDate,
+                                                            style:
+                                                                const TextStyle(
+                                                              overflow:
+                                                                  TextOverflow
+                                                                      .ellipsis,
+                                                              fontSize: 16,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w400,
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          )
                                         ],
                                       ),
                                     ),
